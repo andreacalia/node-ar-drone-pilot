@@ -1,0 +1,30 @@
+{
+  "name": "node-ar-drone-pilot",
+  "version": "0.0.0",
+  "description": "Pilot the AR.Drone using Node and QRs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreacalia/node-ar-drone-pilot.git"
+  },
+  "keywords": [
+    "AR.Drone",
+    "QR",
+    "node"
+  ],
+  "author": "Andrea Calia",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/andreacalia/node-ar-drone-pilot/issues"
+  },
+  "homepage": "https://github.com/andreacalia/node-ar-drone-pilot#readme",
+  "dependencies": {
+    "ar-drone": "^0.3.3",
+    "debug": "^2.2.0",
+    "lodash": "^3.10.1",
+    "qrar": "^0.2.5"
+  }
+}
