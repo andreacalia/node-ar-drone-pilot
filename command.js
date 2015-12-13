@@ -3,56 +3,56 @@ var _ = require('lodash');
 const DEFAULT_COMMANDS = [
     {
         code: 'takeoff',
-        command: 'takeoff()'
+        command: ['takeoff()']
     },
     {
         code: 'land',
-        command: 'land()'
+        command: ['land()']
     },
     {
         code: 'calibrate',
-        command: 'calibrate(0)'
+        command: ['calibrate(0)']
     },
     {
         code: 'enable-bottom-camera',
-        command: 'config("video:video_channel", 3)'
+        command: ['config("video:video_channel", 3)']
     },
     {
         code: 'enable-front-camera',
-        command: 'config("video:video_channel", 0)'
+        command: ['config("video:video_channel", 0)']
     },
     {
         code: 'initiator',
-        command: 'front(0.035)'
+        command: ['front(0.035)']
     },
     {
         code: 'stop',
-        command: 'stop()'
+        command: ['stop()']
     }
 ];
 
 const CONFIGURABLE_COMMANDS = [
     {
         code: 'a',
-        command: `right(0.035)`,
+        command: [`right(0.035)`],
         final: true
     },
     {
         code: 'b',
-        command: 'NOTYETASSIGNED',
+        command: ['NOTYETASSIGNED'],
         start: true
     },
     {
         code: 'c',
-        command: 'NOTYETASSIGNED'
+        command: ['NOTYETASSIGNED']
     },
     {
         code: 'd',
-        command: 'NOTYETASSIGNED'
+        command: ['NOTYETASSIGNED']
     },
     {
         code: 'e',
-        command: 'NOTYETASSIGNED'
+        command: ['NOTYETASSIGNED']
     }
 ]
 

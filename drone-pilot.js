@@ -57,6 +57,29 @@ var lastExecutedCode = '';
 var isFirstQRDetected = true;
 var isReady = true;
 
+function iterateArrayPausable(array, cb) {
+
+    let i = 0;
+
+    function loop () {
+        let value = arr[i];
+        let wait = _.startsWith(value, 'wait') ? parseInt(value.replace('wait(', '').replace(')', '')) : 0;
+        let operation = _.startsWith(value, 'wait') ? ()=>{} : console.log;
+        setTimeout(function () {
+            operation.call(null, value);
+            i++;
+            if (i < arr.length) {
+                myLoop();
+            } else {
+                _.defer(cb.bind(null));
+            }
+        }, wait);
+    }
+
+    loop();
+
+}
+
 function executeCodeAfter(code, time, cb) {
 
     setTimeout(() => {
@@ -66,10 +89,9 @@ function executeCodeAfter(code, time, cb) {
             return;
         }
 
-        console.log(commands.getCommand(code));
+        var selectedCommands = commands.getCommand(code);
 
-        if( cb )
-            cb.call(null);
+        iterateArrayPausable(selectedCommands, cb);
 
     }, time);
 
