@@ -34,7 +34,7 @@ const DEFAULT_COMMANDS = [
 const CONFIGURABLE_COMMANDS = [
     {
         code: 'a',
-        command: [`right(0.035)`],
+        command: ['right(0.035)', 'wait(2000)', 'stop()'],
         final: true
     },
     {

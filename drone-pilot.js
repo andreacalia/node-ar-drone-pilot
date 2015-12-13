@@ -1,3 +1,4 @@
+'use strict'
 var QRAR = require('qrar');
 var drone = require('ar-drone');
 var Parser = require('ar-drone/lib/video/PaVEParser.js');
@@ -15,7 +16,7 @@ var videoFolder = './video';
 var logFolder = './log';
 
 // Cliente para acceder al dron
-client = drone.createClient();
+var client = drone.createClient();
 client.config('general:navdata_demo', 'TRUE');
 client.config('video:video_channel', 0); // La camara 0 es la frontal, la 3 es la de abajo
 client.config('general:navdata_options', 1 << ardrondeConstants.options.MAGNETO); // Abilita la recopilación de los datos del magnetometro
@@ -47,7 +48,8 @@ client.on('navdata', function(data) {
 
 // Empezar a grabar
 videoRecord.record(client, {
-    videoFolder: videoFolder
+    videoFolder: videoFolder,
+    name: `video-${fligthName}.m4v`
 });
 
 // Programa que escanea los codigos QR
@@ -62,16 +64,17 @@ function iterateArrayPausable(array, cb) {
     let i = 0;
 
     function loop () {
-        let value = arr[i];
+        let value = array[i];
         let wait = _.startsWith(value, 'wait') ? parseInt(value.replace('wait(', '').replace(')', '')) : 0;
         let operation = _.startsWith(value, 'wait') ? ()=>{} : console.log;
         setTimeout(function () {
             operation.call(null, value);
             i++;
-            if (i < arr.length) {
-                myLoop();
+            if (i < array.length) {
+                loop();
             } else {
-                _.defer(cb.bind(null));
+		if( cb)
+                    _.defer(cb.bind(null));
             }
         }, wait);
     }

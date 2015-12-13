@@ -10,14 +10,15 @@ var PaVEParser = require('./node_modules/ar-drone/lib/video/PaVEParser.js');
 function record(client, options) {
 
     var videoFolder = options.videoFolder;
+    var finalVideo = options.name;
 
 	try {
 		fs.accessSync(`${videoFolder}/video.h264`, fs.F_OK);
 		fs.unlink(`${videoFolder}/video.h264`);
 		fs.accessSync(`${videoFolder}/video.PaVE`, fs.F_OK);
 		fs.unlink(`${videoFolder}/video.PaVE`);
-		fs.accessSync(`${videoFolder}/video.m4v`, fs.F_OK);
-		fs.unlink(`${videoFolder}/video.m4v`);
+		fs.accessSync(`${videoFolder}/${finalVideo}`, fs.F_OK);
+		fs.unlink(`${videoFolder}/${finalVideo}`);
 	} catch(err) {}
 
 	var videoStream = client.getVideoStream();
@@ -83,7 +84,7 @@ function record(client, options) {
 	    '-r', '29.97', // force 30fps?
 	    '-i', '-',
 	    '-an',
-	    `${videoFolder}/video.m4v`
+	    `${videoFolder}/${finalVideo}`
 	  ],
 	  { stdio: [ -1, -1, videoEncoderStderr ] }
 	);
